@@ -52,14 +52,16 @@ const CreatePokemonForm = ({ hideForm }) => {
       moves: [move1, move2]
     };
     dispatch(postPokemonForm(payload))
-    // let current = store.getState()
-    // console.log(current)
+        .then(data => {
+            let createdPokemon = data;
+            if (createdPokemon) {
+              history.push(`/pokemon/${createdPokemon.id}`);
+              hideForm();
+            }
+        });
 
-    let createdPokemon ;
-    if (createdPokemon) {
-      history.push(`/pokemon/${createdPokemon.id}`);
-      hideForm();
-    }
+
+
   };
 
   const handleCancelClick = (e) => {
