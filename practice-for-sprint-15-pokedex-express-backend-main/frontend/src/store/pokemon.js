@@ -19,6 +19,16 @@ const addOnePokemon = pokemon => ({
   pokemon
 });
 
+export const postPokemonForm = (pokemon) => async dispatch => {
+  const response = await fetch(`/api/pokemon`, {method: "POST", body: JSON.stringify(pokemon), 
+  headers: {"Content-Type": "application/json", "Accept": "application/json"}})
+
+  if (response.ok) {
+    const pokemon = await response.json()
+    dispatch(addOnePokemon(pokemon))
+  }
+}
+
 export const getPokemonDetail = (id) => async dispatch => {
   const response = await fetch(`/api/pokemon/${id}`)
 
